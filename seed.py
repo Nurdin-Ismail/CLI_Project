@@ -5,7 +5,7 @@ import random
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from lib.modules import Person, Connection, Relationship, User
+from lib.modules import Person, connections, Relationship, User
 
 if __name__ == '__main__':
     engine = create_engine('sqlite:///lib/family.db')

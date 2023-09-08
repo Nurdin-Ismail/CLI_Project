@@ -253,11 +253,11 @@ class Cli:
         relationship_type = input("Enter either one of those options: ")
         
         if relationship_type == '1':
-            new_connection = Connection(
+            new_connection = connections(
             individual1_id=person1.id,
             individual2_id=person2.id,
             relationship_id= relationship_type,
-            user_id= user_id
+            users_id= user_id
         )
             self.session.add(new_connection)
             self.session.commit()
@@ -266,11 +266,11 @@ class Cli:
             print(f"Connection created between {person1.first_name} and {person2.first_name}: {relationship_type}") 
         elif relationship_type == '3':
                
-            new_connection2 = Connection(
+            new_connection2 = connections(
             individual1_id=person1.id,
             individual2_id=person2.id,
             relationship_id= relationship_type,
-            user_id= user_id
+            users_id= user_id
         )
 
             self.session.add(new_connection)
@@ -279,11 +279,11 @@ class Cli:
             self.session.commit()
             print(f"Connection created between {person1.first_name} and {person2.first_name}: {relationship_type}") 
         elif relationship_type == '2':
-            new_connection = Connection(
+            new_connection = connections(
             individual1_id=person1.id,
             individual2_id=person2.id,
             relationship_id= relationship_type,
-            user_id= user_id
+            users_id= user_id
         )
             self.session.add(new_connection)
             self.session.commit()
