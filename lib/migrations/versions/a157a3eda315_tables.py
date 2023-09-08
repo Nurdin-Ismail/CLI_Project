@@ -1,8 +1,8 @@
-"""All tables
+"""Tables
 
-Revision ID: c218848e92c7
-Revises: 60c44dbe7c35
-Create Date: 2023-09-08 12:04:51.113666
+Revision ID: a157a3eda315
+Revises: 3b4abea5eaf6
+Create Date: 2023-09-08 14:38:51.431044
 
 """
 from typing import Sequence, Union
@@ -12,8 +12,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'c218848e92c7'
-down_revision: Union[str, None] = '60c44dbe7c35'
+revision: str = 'a157a3eda315'
+down_revision: Union[str, None] = '3b4abea5eaf6'
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
@@ -37,7 +37,6 @@ def upgrade() -> None:
     sa.Column('first_name', sa.String(), nullable=True),
     sa.Column('last_name', sa.String(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
-    sa.Column('user_relashionship', sa.String(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -50,7 +49,7 @@ def upgrade() -> None:
     sa.ForeignKeyConstraint(['individual2_id'], ['people.id'], ),
     sa.ForeignKeyConstraint(['relationship_id'], ['relationships.id'], ),
     sa.ForeignKeyConstraint(['users_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('individual1_id', 'individual2_id', 'relationship_id', 'users_id')
+    sa.PrimaryKeyConstraint('relationship_id', 'users_id')
     )
     # ### end Alembic commands ###
 

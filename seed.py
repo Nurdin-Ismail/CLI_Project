@@ -13,7 +13,7 @@ if __name__ == '__main__':
     session = Session()
 
     session.query(Person).delete()
-    session.query(Connection).delete()
+    session.query(connections).delete()
     # session.query(Relationship).delete()
     
     # session.add(Relationship(type_of_relationship='Parent'))

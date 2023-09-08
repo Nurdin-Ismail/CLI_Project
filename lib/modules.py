@@ -4,8 +4,6 @@ from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
-
-
 connections = Table(
     'connections',
     Base.metadata,
@@ -13,18 +11,12 @@ connections = Table(
     Column('individual2_id', Integer, ForeignKey('people.id'), nullable=False),
     Column('relationship_id', Integer, ForeignKey('relationships.id'), primary_key=True),
     Column('users_id', Integer, ForeignKey('users.id'), primary_key=True)
-)
-    
-   
-
-      
+)       
 
 
 class Person(Base):
-    
     __tablename__ = "people"
-     
-        
+
     id = Column(Integer, primary_key=True)
     first_name = Column(String)
     last_name = Column(String)
@@ -33,10 +25,13 @@ class Person(Base):
     relationships = relationship(
         'Relationship',
         secondary='connections',
-        back_populates='people'
+        primaryjoin=(connections.c.individual1_id == id),
+        secondaryjoin=(connections.c.individual2_id == id),
+        back_populates='people',
+        foreign_keys=[connections.c.individual1_id, connections.c.individual2_id]
     )
-    
-    
+
+
 class Relationship(Base):
     __tablename__ = "relationships"
 
@@ -46,10 +41,11 @@ class Relationship(Base):
     people = relationship(
         'Person',
         secondary='connections',
-        back_populates='relationships'
+        primaryjoin=(connections.c.relationship_id == id),
+        secondaryjoin=(connections.c.individual1_id == id),
+        back_populates='relationships',
+        foreign_keys=[connections.c.relationship_id, connections.c.individual1_id]
     )
-    
-    
 
 class User(Base):
     __tablename__ = "users"

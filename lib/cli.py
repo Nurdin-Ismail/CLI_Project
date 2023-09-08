@@ -155,7 +155,7 @@ class Cli:
             elif user_choice == "G" or user_choice == "g":
                 Cli.generate_tree(self, user_choice, user_id)
             elif user_choice == "Q":
-                break
+                exit()
             else:
                 print("Invalid option entered. Please select from the list of options or press Q to exit.")
 
@@ -171,7 +171,7 @@ class Cli:
                 print(' ')
 
                 for i in query:
-                     print(f'{i.id} |  {i.first_name} {i.last_name } > {i.user_relashionship}')
+                     print(f'{i.id} |  {i.first_name} {i.last_name }')
                 print(' ')
                 print(' ')
 
@@ -253,7 +253,7 @@ class Cli:
         relationship_type = input("Enter either one of those options: ")
         
         if relationship_type == '1':
-            new_connection = connections(
+            new_connection = connections.insert().values(
             individual1_id=person1.id,
             individual2_id=person2.id,
             relationship_id= relationship_type,
@@ -266,7 +266,7 @@ class Cli:
             print(f"Connection created between {person1.first_name} and {person2.first_name}: {relationship_type}") 
         elif relationship_type == '3':
                
-            new_connection2 = connections(
+            new_connection2 = connections.insert().values(
             individual1_id=person1.id,
             individual2_id=person2.id,
             relationship_id= relationship_type,
@@ -279,7 +279,7 @@ class Cli:
             self.session.commit()
             print(f"Connection created between {person1.first_name} and {person2.first_name}: {relationship_type}") 
         elif relationship_type == '2':
-            new_connection = connections(
+            new_connection = connections.insert().values(
             individual1_id=person1.id,
             individual2_id=person2.id,
             relationship_id= relationship_type,
