@@ -74,7 +74,7 @@ class Cli:
 
 
     def login_and_get_user_id(self):
-         while True:
+        while True:
             
             print(' ')
             print(' ')
@@ -86,8 +86,11 @@ class Cli:
             
 
             type_user = input('Which of the 2: ')
-
-            if type_user == '2':  # Compare with a string, not an integer
+            if type_user == '1':
+                self.create_user()
+                
+                
+            elif type_user == '2':  # Compare with a string, not an integer
                 print(' ')
                 first_name = input("Enter your first name: ")
                 last_name = input("Enter your last name: ")
@@ -96,12 +99,6 @@ class Cli:
                     User.first_name == first_name,
                     User.last_name == last_name
                 ).first()
-
-               
-
-                
-
-                
 
                 if user:
                     print(' ')
@@ -114,8 +111,7 @@ class Cli:
                     break  # Exit the loop if login is successful
                 else:
                     print("Login failed. Please try again.")
-            elif type_user == '1':
-                self.create_user()
+                
             else:
                 print('Wrong input! Pick one of the 2 options.')
  
@@ -186,6 +182,7 @@ class Cli:
                      
             else:
                 print('No family memebers added at the moment.')
+                print(' ')
                 
                 answer = input("Press Any Key To Go Back To main Menu")
 
@@ -216,9 +213,9 @@ class Cli:
 
             print(f"{new_person.first_name} {new_person.last_name} has been added!")
 
-    # ... (other methods)
+  
                 
-        # Inside your Cli class
+        
 
     def create_connection(self, user_choice, user_id):
         print(" ")
@@ -292,6 +289,7 @@ class Cli:
             print(f"Connection created between {person1.first_name} and {person2.first_name}: {relationship_type}")
         else:
             print('Not supported, only pick the listed options.')
+        pass
 
        
 
@@ -299,6 +297,9 @@ class Cli:
 
     def update_status(self, user_choice):
                 pass
+            
+            
+            
     def delete_individual(self, user_choice, user_id):
         while user_choice:
             
@@ -337,7 +338,7 @@ class Cli:
         # Delete the person from the database
                 self.session.delete(person_to_delete)
                 self.session.commit()
-                pritn(f"Successfully deleted person {person_to_delete.first_name} {person_to_delete.last_name}.")
+                print(f"Successfully deleted person {person_to_delete.first_name} {person_to_delete.last_name}.")
         #     except Exception as e:
         # # Handle any exceptions that may occur during the deletion
         #         self.session.rollback()
@@ -349,23 +350,18 @@ class Cli:
         print(" ")
         first_name = input("Enter First Name: ")
         last_name = input("Enter Last Name: ")
-
-        # Create a new User instance
         new_user = User(first_name=first_name, last_name=last_name)
         existing_user = self.session.query(User).filter(
             User.first_name == new_user.first_name,
             User.last_name == new_user.last_name
          ).first()
         if existing_user:
-            if existing_user.first_name == new_user.first_name and existing_user.last_name == new_user.last_name:
                  print('This user already exists!')
-            else:
-
-        # Add the new user to the database
-               self.session.add(new_user)
-               self.session.commit()
-               print(f"User {new_user.id}:{new_user.first_name} {new_user.last_name} has been created!")
-               self.starter(new_user.id)
+        else:
+                 self.session.add(new_user)
+                 self.session.commit()
+                 print(f"User {new_user.id}:{new_user.first_name} {new_user.last_name} has been created!")
+                 self.starter(new_user.id)
     
     
     def generate_tree(self, user_choice, user_id):
